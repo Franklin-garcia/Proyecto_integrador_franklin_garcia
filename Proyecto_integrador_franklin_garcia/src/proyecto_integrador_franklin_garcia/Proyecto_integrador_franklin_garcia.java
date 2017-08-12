@@ -40,13 +40,18 @@ public class Proyecto_integrador_franklin_garcia {
                     for (Jugador i : lista) {
                         elementos += "\n" + lista.indexOf(i) + " " + i;
                     }
-                    int player1 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador1"));
-                    int player2 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador2"));
+                    int player1 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador-1 "));
+                    int player2 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador-2"));
 
-                    String tablero[][] = new String[20][20];
-                    tablero = tablero();
-                    impTablero(tablero);
-
+                    JOptionPane.showMessageDialog(null, "Jugadores \n"
+                            + "Turno 1----rey y duques pertenece a: " + lista.get(player1).getNombre() + "\n"
+                            + "Turno 2----Rebeldes pertenece a: " + lista.get(player2).getNombre() + "\n"
+                            + "Rebelde  0 \n"
+                            + "Rey & \n"
+                            + "Duques + \n");
+                    String tablero[][] = tablero();
+                    impTablero(tablero, 0, 0);
+                    System.out.println("");//salto de linea
                     while (res < 10) {
                         if (cont == 0) {
                             System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
@@ -54,6 +59,14 @@ public class Proyecto_integrador_franklin_garcia {
                             fila1 = lectura.nextInt();
                             System.out.println("Ingrese columna-1");
                             columna1 = lectura.nextInt();
+                            while (pertenencia_player1(tablero, fila1, columna1)==2) {
+                                System.out.println("Esa pieza no te pertenece o es es vacio\n"
+                                        + "Intentalo de nuevo");
+                                System.out.println("Ingrese fila-1");
+                                fila1 = lectura.nextInt();
+                                System.out.println("Ingrese columna-1");
+                                columna1 = lectura.nextInt();
+                            }
                             System.out.println("Ingrese fila-2");
                             fila2 = lectura.nextInt();
                             System.out.println("Ingrse columna-2");
@@ -61,7 +74,8 @@ public class Proyecto_integrador_franklin_garcia {
 
                             tablero[fila2][columna2] = tablero[fila1][columna1];
                             tablero[fila1][columna1] = "[ ]";
-                            impTablero(tablero);
+                            impTablero(tablero, 0, 0);
+                            System.out.println("");//salto de linea
                             cont = 1;
                         }
                         if (cont == 1) {
@@ -77,7 +91,7 @@ public class Proyecto_integrador_franklin_garcia {
 
                             tablero[fila2][columna2] = tablero[fila1][columna1];
                             tablero[fila1][columna1] = "[ ]";
-                            impTablero(tablero);
+                            impTablero(tablero, 0, 0);//salto de linea
                             cont = 0;
                         }
                     }
@@ -91,9 +105,9 @@ public class Proyecto_integrador_franklin_garcia {
         Rey r = new Rey();
         Duques d = new Duques();
         Rebeldes re = new Rebeldes();
-        String temporal[][] = new String[20][20];
-        for (int i = 0; i < temporal.length - 1; i++) {
-            for (int j = 0; j < temporal[i].length - 1; j++) {
+        String temporal[][] = new String[19][19];
+        for (int i = 0; i < temporal.length; i++) {
+            for (int j = 0; j < temporal[i].length; j++) {
                 temporal[i][j] = "[ ]";
             }
         }
@@ -196,8 +210,33 @@ public class Proyecto_integrador_franklin_garcia {
         return temporal;
     }
 
-    public static void impTablero(String[][] tablero) {
-  
+    public static void impTablero(String[][] temporal, int filas, int columnas) {
+        if (filas == temporal.length - 1 && columnas == temporal[0].length - 1) {
+            System.out.print(temporal[filas][columnas]);
+        } else if (columnas == temporal[0].length - 1) {
+            System.out.println(temporal[filas][columnas]);
+            impTablero(temporal, filas + 1, 0);
+        } else {
+            System.out.print(temporal[filas][columnas]);
+            impTablero(temporal, filas, columnas + 1);
+        }
+
+    }
+
+    public static int pertenencia_player1(String[][] tablero, int fila, int columna) {
+        if (tablero[fila][columna].equals("[+]") || tablero[fila][columna].equals("[&]")) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    public static int pertenencia_player2(String[][] tablero, int fila, int columna) {
+        if (tablero[fila][columna].equals("[0]")) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
 }
