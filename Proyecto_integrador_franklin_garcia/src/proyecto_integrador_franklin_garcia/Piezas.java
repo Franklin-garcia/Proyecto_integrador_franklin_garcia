@@ -14,5 +14,5 @@ public abstract class Piezas {
     public Piezas() {
     }
     
-    public  abstract boolean movimientos();
+    public  abstract int movimientos(String [][] tablero, int fila1,int columna1, int fila2 ,int columna2);
 }

@@ -21,7 +21,7 @@ public class Rebeldes extends Piezas{
     }
 
     @Override
-    public boolean movimientos() {
+    public int movimientos(String [][] tablero, int fila1,int columna1, int fila2 ,int columna2) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

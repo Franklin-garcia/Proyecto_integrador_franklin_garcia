@@ -9,7 +9,7 @@ package proyecto_integrador_franklin_garcia;
  *
  * @author Franklin Garcia
  */
-public class Duques extends Piezas{
+public class Duques extends Piezas {
 
     public Duques() {
         super();
@@ -19,13 +19,14 @@ public class Duques extends Piezas{
     public String toString() {
         return "+";
     }
-    
 
     @Override
-    public boolean movimientos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int movimientos(String[][] tablero, int fila1, int columna1, int fila2, int columna2) {
+        if (fila1 == fila2 || columna1 == columna2) {
+            return 1;
+        }else{
+            return 2;
+        }
     }
 
-  
-    
 }
