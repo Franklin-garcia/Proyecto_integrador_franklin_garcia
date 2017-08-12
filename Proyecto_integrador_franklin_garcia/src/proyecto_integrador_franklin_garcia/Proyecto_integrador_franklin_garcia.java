@@ -29,11 +29,13 @@ public class Proyecto_integrador_franklin_garcia {
                 case "1": {
                     String nombre=JOptionPane.showInputDialog("Nombre");
                     lista.add(new Jugador(nombre,0));
-                    JOptionPane.showInputDialog("Hecho");
+                    JOptionPane.showMessageDialog(null,"Hecho");
                 }
                 break;
                 case "2": {
-                    
+                    String tablero[][]=new String[20][20];
+                    tablero=tablero();
+                    impTablero(tablero);
 
                 }
                 break;
@@ -99,6 +101,7 @@ public class Proyecto_integrador_franklin_garcia {
         temporal[18][2]="["+re.toString() +"]";
         temporal[18][13]="["+re.toString() +"]";
         temporal[18][16]="["+re.toString() +"]";
+        temporal[18][5]="["+re.toString() +"]";
         
         //rey 
         temporal[9][9]="["+r.toString() +"]";
@@ -146,6 +149,13 @@ public class Proyecto_integrador_franklin_garcia {
         temporal[13][10]="["+d.toString() +"]";
         return temporal;
     }
-    public static
+    public static void impTablero(String [][]tablero){
+        for (int i = 0; i < tablero.length-1; i++) {
+            for (int j = 0; j < tablero[i].length-1; j++) {
+                System.out.print(tablero[i][j]);
+            }
+            System.out.println("");
+        }
+    }
 
 }

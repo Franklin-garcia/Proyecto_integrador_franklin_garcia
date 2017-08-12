@@ -17,7 +17,7 @@ public class Rebeldes extends Piezas{
 
     @Override
     public String toString() {
-        return "+";
+        return "0";
     }
 
     @Override

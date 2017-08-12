@@ -17,7 +17,7 @@ public class Duques extends Piezas{
 
     @Override
     public String toString() {
-        return "*";
+        return "+";
     }
     
 
