@@ -36,5 +36,10 @@ public class Jugador {
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
-    
+
+    @Override
+    public String toString() {
+        return  "nombre=" + nombre ;
+    }
+   
 }
