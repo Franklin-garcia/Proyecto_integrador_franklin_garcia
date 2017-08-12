@@ -59,7 +59,7 @@ public class Proyecto_integrador_franklin_garcia {
                             fila1 = lectura.nextInt();
                             System.out.println("Ingrese columna-1");
                             columna1 = lectura.nextInt();
-                            while (pertenencia_player1(tablero, fila1, columna1)==2) {
+                            while (pertenencia_player1(tablero, fila1, columna1) == 2) {
                                 System.out.println("Esa pieza no te pertenece o es es vacio\n"
                                         + "Intentalo de nuevo");
                                 System.out.println("Ingrese fila-1");
@@ -84,6 +84,14 @@ public class Proyecto_integrador_franklin_garcia {
                             fila1 = lectura.nextInt();
                             System.out.println("Ingrese columna-1");
                             columna1 = lectura.nextInt();
+                            while (pertenencia_player2(tablero, fila1, columna1) == 2) {
+                                System.out.println("Esa pieza no te pertenece o es es vacio\n"
+                                        + "Intentalo de nuevo");
+                                System.out.println("Ingrese fila-1");
+                                fila1 = lectura.nextInt();
+                                System.out.println("Ingrese columna-1");
+                                columna1 = lectura.nextInt();
+                            }
                             System.out.println("Ingrese fila-2");
                             fila2 = lectura.nextInt();
                             System.out.println("Ingrse columna-2");
@@ -92,6 +100,7 @@ public class Proyecto_integrador_franklin_garcia {
                             tablero[fila2][columna2] = tablero[fila1][columna1];
                             tablero[fila1][columna1] = "[ ]";
                             impTablero(tablero, 0, 0);//salto de linea
+                            System.out.println("");
                             cont = 0;
                         }
                     }
@@ -239,4 +248,34 @@ public class Proyecto_integrador_franklin_garcia {
         }
     }
 
+        public static boolean movimientoDiagonal(int x, int y,int xB,int yB,int incX, int incY){// 
+        for(int xF = x,yF=y; xF < 8 && yF < 8 && xF>=0 && yF>=0; xF+=incX,yF+=incY){// 
+            if(xB == xF && yB == yF){// 
+                return true;// 
+            }// 
+        }// 
+        return false;// 
+    }// 
+
+    
+    /*  Pieza torre = new Pieza(pieza.name(), blanca?"♖":"♜",blanca); 
+                torre.setX(x); 
+                torre.setY(y); 
+                torre.setComer((p)->{ 
+                    if(movimientoDiagonal(torre.getX(), torre.getY(), p.getX(), p.getY(), 0, -1)){ 
+                        return true; 
+                    } 
+                    if(movimientoDiagonal(torre.getX(), torre.getY(), p.getX(), p.getY(), 0, 1)){ 
+                        return true; 
+                    } 
+                    if(movimientoDiagonal(torre.getX(), torre.getY(), p.getX(), p.getY(), -1, 0)){ 
+                        return true; 
+                    } 
+                    if(movimientoDiagonal(torre.getX(), torre.getY(), p.getX(), p.getY(), 1, 0)){ 
+                        return true; 
+                    } 
+                    return false; 
+                }); 
+                return torre; 
+     */
 }
