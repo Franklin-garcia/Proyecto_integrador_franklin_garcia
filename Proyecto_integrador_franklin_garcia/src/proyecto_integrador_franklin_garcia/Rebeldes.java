@@ -22,7 +22,11 @@ public class Rebeldes extends Piezas{
 
     @Override
     public int movimientos(String [][] tablero, int fila1,int columna1, int fila2 ,int columna2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          if (fila1 == fila2 || columna1 == columna2) {
+            return 1;
+        }else{
+            return 2;
+        }
     }
     
 }

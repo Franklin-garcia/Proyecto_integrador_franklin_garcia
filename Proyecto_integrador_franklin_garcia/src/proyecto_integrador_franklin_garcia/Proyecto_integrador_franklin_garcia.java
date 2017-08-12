@@ -56,12 +56,14 @@ public class Proyecto_integrador_franklin_garcia {
                     impTablero(tablero, 0, 0);
                     System.out.println("");//salto de linea
                     while (res < 10) {
+//...........................................Jugador1..............................................................                        
                         if (cont == 0) {
                             System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
                             System.out.println("Ingrese fila-1");
                             fila1 = lectura.nextInt();
                             System.out.println("Ingrese columna-1");
                             columna1 = lectura.nextInt();
+//------------------------------------------Validacion de pertenencia-------------------------------------------------
                             while (pertenencia_player1(tablero, fila1, columna1) == 2) {
                                 JOptionPane.showMessageDialog(null, "Esa pieza no te pertenece o es es vacio\n"
                                         + "Intentalo de nuevo");
@@ -70,11 +72,12 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrese columna-1");
                                 columna1 = lectura.nextInt();
                             }
+//--------------------------------------------------------------------------------------------------------------------                            
                             System.out.println("Ingrese fila-2");
                             fila2 = lectura.nextInt();
                             System.out.println("Ingrse columna-2");
                             columna2 = lectura.nextInt();
-
+//-------------------------------validaciones de movimientos jugador1---------------------------------------------------
                             while (tablero[fila1][columna1].equals("[+]") && d.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
                                 JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
                                 System.out.println("Ingrese fila-2");
@@ -82,16 +85,55 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrse columna-2");
                                 columna2 = lectura.nextInt();
                             }
-                            System.out.println("torre: " + d.movimientos(tablero, fila1, columna1, fila2, columna2));
+                            while (tablero[fila1][columna1].equals("[&]") && r.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
+                            }
+//-----------------------------------------------------------------------------------------------------------------------                            
                             tablero[fila2][columna2] = tablero[fila1][columna1];
                             tablero[fila1][columna1] = "[ ]";
                             impTablero(tablero, 0, 0);
                             System.out.println("");//salto de linea
                             cont = 1;
                         }
+
+//.........................................Jugador2.........................................................                        
                         if (cont == 1) {
                             System.out.println("Turno 2" + lista.get(player2).getNombre() + "\n");
-
+                            System.out.println("Ingrese fila-1");
+                            fila1 = lectura.nextInt();
+                            System.out.println("Ingrese columna-1");
+                            columna1 = lectura.nextInt();
+//------------------------------------------Validacion de pertenencia-------------------------------------------------
+                            while (pertenencia_player2(tablero, fila1, columna1) == 2) {
+                                JOptionPane.showMessageDialog(null, "Esa pieza no te pertenece o es es vacio\n"
+                                        + "Intentalo de nuevo");
+                                System.out.println("Ingrese fila-1");
+                                fila1 = lectura.nextInt();
+                                System.out.println("Ingrese columna-1");
+                                columna1 = lectura.nextInt();
+                            }
+//--------------------------------------------------------------------------------------------------------------------                            
+                            System.out.println("Ingrese fila-2");
+                            fila2 = lectura.nextInt();
+                            System.out.println("Ingrse columna-2");
+                            columna2 = lectura.nextInt();
+//-------------------------------validaciones de movimientos jugador1---------------------------------------------------
+                            while (tablero[fila1][columna1].equals("[0]") && re.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
+                            }
+//-----------------------------------------------------------------------------------------------------------------------                            
+                            tablero[fila2][columna2] = tablero[fila1][columna1];
+                            tablero[fila1][columna1] = "[ ]";
+                            impTablero(tablero, 0, 0);
+                            System.out.println("");//salto de linea
                             cont = 0;
                         }
                     }
