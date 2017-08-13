@@ -58,7 +58,7 @@ public class Proyecto_integrador_franklin_garcia {
                     while (res < 10) {
 //...........................................Jugador1..............................................................                        
                         if (cont == 0) {
-                            System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
+                            /*System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
                             System.out.println("Ingrese fila-1");
                             fila1 = lectura.nextInt();
                             System.out.println("Ingrese columna-1");
@@ -97,6 +97,7 @@ public class Proyecto_integrador_franklin_garcia {
                             tablero[fila1][columna1] = "[ ]";
                             impTablero(tablero, 0, 0);
                             System.out.println("");//salto de linea
+                             */
                             cont = 1;
                         }
 
@@ -121,9 +122,16 @@ public class Proyecto_integrador_franklin_garcia {
                             fila2 = lectura.nextInt();
                             System.out.println("Ingrse columna-2");
                             columna2 = lectura.nextInt();
-//-------------------------------validaciones de movimientos jugador1---------------------------------------------------
+//-------------------------------validaciones de movimientos jugador2---------------------------------------------------
                             while (tablero[fila1][columna1].equals("[0]") && re.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
                                 JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
+                            }
+                            while (pasar_player2(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
                                 System.out.println("Ingrese fila-2");
                                 fila2 = lectura.nextInt();
                                 System.out.println("Ingrse columna-2");
@@ -281,4 +289,31 @@ public class Proyecto_integrador_franklin_garcia {
         }
     }
 
+    public static int pasar_player2(String[][] tablero, int fila1, int columna1, int fila2, int columna2) {
+        int cont1 = 0, cont2 = 0, retorno = 0;
+        if (fila1 == fila2 && columna1 < columna2) {
+            cont1 = fila1;
+            cont2 = columna1;
+            while (cont2 < columna2) {
+                System.out.println("entro al while");
+                if (tablero[cont1][cont2].equals("[ ]")) {
+                    retorno = 1;
+                    System.out.println("entro al if de 1");
+                }
+                if (tablero[fila2][cont2].equals("[+]")
+                        || tablero[fila2][cont2].equals("[0]")
+                        || tablero[fila2][cont2].equals("[&]")) {
+                    System.out.println("validacion");
+                    retorno = 2;
+                    break;
+                }
+
+                System.out.println("contadores: " + cont1 + " " + cont2);
+                cont2++;
+            }
+        }
+        System.out.println("retorno:" + retorno + "cont: " + cont2);
+        return retorno;
+
+    }
 }
