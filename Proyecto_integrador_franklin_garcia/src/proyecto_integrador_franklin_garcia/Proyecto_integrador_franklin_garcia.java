@@ -130,7 +130,7 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrse columna-2");
                                 columna2 = lectura.nextInt();
                             }
-                            while (pasar_player2(tablero, fila1, columna1, fila2, columna2) == 2) {
+                            while (pasar_player(tablero, fila1, columna1, fila2, columna2) == 2) {
                                 JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
                                 System.out.println("Ingrese fila-2");
                                 fila2 = lectura.nextInt();
@@ -289,30 +289,59 @@ public class Proyecto_integrador_franklin_garcia {
         }
     }
 
-    public static int pasar_player2(String[][] tablero, int fila1, int columna1, int fila2, int columna2) {
-        int cont1 = 0, cont2 = 0, retorno = 0;
+    public static int pasar_player(String[][] tablero, int fila1, int columna1, int fila2, int columna2) {
+        int cont1 = 0, cont2 = 0, retorno = 1;
+
         if (fila1 == fila2 && columna1 < columna2) {
             cont1 = fila1;
-            cont2 = columna1;
+            cont2 = columna1 + 1;
             while (cont2 < columna2) {
-                System.out.println("entro al while");
-                if (tablero[cont1][cont2].equals("[ ]")) {
-                    retorno = 1;
-                    System.out.println("entro al if de 1");
+                if (tablero[fila2][cont2].equals("[+]")
+                        || tablero[fila2][cont2].equals("[0]")
+                        || tablero[fila2][cont2].equals("[&]")) {
+                    retorno = 2;
                 }
+
+                cont2++;
+            }
+        } else if (fila1 == fila2 && columna1 > columna2) {
+            cont1 = fila1;
+            cont2 = columna1 - 1;
+            while (cont2 > columna2) {
+                System.out.println("entro al while");
                 if (tablero[fila2][cont2].equals("[+]")
                         || tablero[fila2][cont2].equals("[0]")
                         || tablero[fila2][cont2].equals("[&]")) {
                     System.out.println("validacion");
                     retorno = 2;
-                    break;
+                }
+                cont2--;
+            }
+        } else if (fila1 < fila2 && columna1 == columna2) {
+            cont1 = fila1 + 1;
+            cont2 = columna1;
+            while (cont1 < fila2) {
+                if (tablero[cont1][cont1].equals("[+]")
+                        || tablero[cont1][columna2].equals("[0]")
+                        || tablero[cont1][columna2].equals("[&]")) {
+                    retorno = 2;
                 }
 
-                System.out.println("contadores: " + cont1 + " " + cont2);
-                cont2++;
+                cont1++;
+            }
+        } else if (fila1 > fila2 && columna1 == columna2) {
+            cont1 = fila1 - 1;
+            cont2 = columna1;
+            while (cont1 > fila2) {
+                if (tablero[cont1][cont1].equals("[+]")
+                        || tablero[cont1][columna2].equals("[0]")
+                        || tablero[cont1][columna2].equals("[&]")) {
+                    retorno = 2;
+                }
+
+                cont1--;
             }
         }
-        System.out.println("retorno:" + retorno + "cont: " + cont2);
         return retorno;
 
     }
