@@ -145,7 +145,7 @@ public class Proyecto_integrador_franklin_garcia {
                             cont = 0;
                         }
                     }
-                }
+                }///fin de la programacion del juego
                 break;
             }
         }
@@ -345,4 +345,30 @@ public class Proyecto_integrador_franklin_garcia {
         return retorno;
 
     }
+
+    public static int Ganar_player1(String tablero[][]) {
+        if (tablero[0][0].equals("[&]")
+                || tablero[0][1].equals("[&]")
+                || tablero[1][0].equals("[&]")
+                || tablero[1][1].equals("[&]")
+                || tablero[0][18].equals("[&]")
+                || tablero[0][17].equals("[&]")
+                || tablero[1][17].equals("[&]")
+                || tablero[1][18].equals("[&]")
+                || tablero[17][0].equals("[&]")
+                || tablero[17][1].equals("[&]")
+                || tablero[18][0].equals("[&]")
+                || tablero[18][1].equals("[&]")
+                || tablero[17][17].equals("[&]")
+                || tablero[17][18].equals("[&]")
+                || tablero[18][18].equals("[&]")
+                || tablero[18][17].equals("[&]")) {
+            return 1;
+
+        } else {
+            return 2;
+        }
+    }
+
+
 }
