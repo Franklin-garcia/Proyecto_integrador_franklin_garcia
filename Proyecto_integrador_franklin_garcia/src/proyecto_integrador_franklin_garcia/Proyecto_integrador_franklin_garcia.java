@@ -58,7 +58,7 @@ public class Proyecto_integrador_franklin_garcia {
                     while (res < 10) {
 //...........................................Jugador1..............................................................                        
                         if (cont == 0) {
-                            /*System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
+                            System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
                             System.out.println("Ingrese fila-1");
                             fila1 = lectura.nextInt();
                             System.out.println("Ingrese columna-1");
@@ -92,15 +92,29 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrse columna-2");
                                 columna2 = lectura.nextInt();
                             }
+                            while (pasar_player(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
+                            }
+                            while (esquina(tablero, fila2, columna2) == 2) {
+                                JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
+                            }
 //-----------------------------------------------------------------------------------------------------------------------                            
                             tablero[fila2][columna2] = tablero[fila1][columna1];
                             tablero[fila1][columna1] = "[ ]";
+                            tablero = comer_player1(tablero);//comer
                             impTablero(tablero, 0, 0);
                             System.out.println("");//salto de linea
-                             */
+
                             cont = 1;
                         }
-
 //.........................................Jugador2.........................................................                        
                         if (cont == 1) {
                             System.out.println("Turno 2" + lista.get(player2).getNombre() + "\n");
@@ -137,13 +151,22 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrse columna-2");
                                 columna2 = lectura.nextInt();
                             }
+                            while (esquina(tablero, fila2, columna2) == 2) {
+                                JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
+                            }
 //-----------------------------------------------------------------------------------------------------------------------                            
                             tablero[fila2][columna2] = tablero[fila1][columna1];
                             tablero[fila1][columna1] = "[ ]";
+
+                            tablero = comer_player2(tablero);//comer 
                             impTablero(tablero, 0, 0);
                             System.out.println("");//salto de linea
                             cont = 0;
-                        }
+                        }//fin jugador 2F
                     }
                 }///fin de la programacion del juego
                 break;
@@ -308,11 +331,9 @@ public class Proyecto_integrador_franklin_garcia {
             cont1 = fila1;
             cont2 = columna1 - 1;
             while (cont2 > columna2) {
-                System.out.println("entro al while");
                 if (tablero[fila2][cont2].equals("[+]")
                         || tablero[fila2][cont2].equals("[0]")
                         || tablero[fila2][cont2].equals("[&]")) {
-                    System.out.println("validacion");
                     retorno = 2;
                 }
                 cont2--;
@@ -370,5 +391,140 @@ public class Proyecto_integrador_franklin_garcia {
         }
     }
 
+    public static int Ganar_player2(String tablero[][]) {
+        int retorno = 1;
+        if (tablero[9][9].equals("[&]")
+                && tablero[8][9].equals("[0]")
+                && tablero[9][8].equals("[0]")
+                && tablero[9][10].equals("[0]")
+                && tablero[10][9].equals("[0]")) {
+            retorno = 2;
+        }
+        if (tablero[9][8].equals("[&]")
+                && tablero[8][8].equals("[0]")
+                && tablero[9][7].equals("[0]")
+                && tablero[10][8].equals("[0]")) {
+            retorno = 2;
+        }
+        if (tablero[9][8].equals("[&]")
+                && tablero[10][8].equals("[0]")
+                && tablero[11][9].equals("[0]")
+                && tablero[10][10].equals("[0]")) {
+            retorno = 2;
+        }
+        if (tablero[9][10].equals("[&]")
+                && tablero[8][10].equals("[0]")
+                && tablero[9][11].equals("[0]")
+                && tablero[10][10].equals("[0]")) {
+            retorno = 2;
+        }
+        if (tablero[8][9].equals("[&]")
+                && tablero[8][8].equals("[0]")
+                && tablero[7][9].equals("[0]")
+                && tablero[8][10].equals("[0]")) {
+            retorno = 2;
+        }
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (tablero[i][j].equals("[&]") && i > 0 && j > 0) {
+                    if (tablero[i + 1][j].equals("[0]")
+                            && tablero[i - 1][j].equals("[0]")
+                            && tablero[i][j - 1].equals("[0]")
+                            && tablero[i][j + 1].equals("[0]")) {
+                        retorno = 2;
+                    }
+                } else if (tablero[0][j].equals("[&]")) {
+                    if (tablero[i][j + 1].equals("[0]")
+                            && tablero[i][j - 1].equals("[0]")
+                            && tablero[i + 1][j].equals("[0]")) {
+                        retorno = 2;
+                    }
+
+                } else if (tablero[i][0].equals("[&]")) {
+                    if (tablero[i + 1][j].equals("[0]")
+                            && tablero[i - 1][j].equals("[0]")
+                            && tablero[i][j + 1].equals("[0]")) {
+                        retorno = 2;
+                    }
+                } else {
+                    retorno = 1;
+                }
+            }
+        }
+
+        return retorno;
+    }
+
+    public static String[][] comer_player1(String tablero[][]) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (tablero[i][j].equals("[0]") && i > 0 && j > 0) {
+                    if (tablero[i - 1][j].equals("[+]") && tablero[i + 1][j].equals("[+]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                    if (tablero[i][j - 1].equals("[+]") && tablero[i][j + 1].equals("[+]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                } else if (tablero[0][j].equals("[0]") && j > 0) {
+                    if (tablero[i][j - 1].equals("[+]") && tablero[i][j + 1].equals("[+]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                } else if (tablero[i][0].equals("[0]") && i > 0) {
+                    if (tablero[i - 1][j].equals("[+]") && tablero[i + 1][j].equals("[+]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                }
+            }
+        }
+        return tablero;
+    }
+
+    public static String[][] comer_player2(String tablero[][]) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (tablero[i][j].equals("[+]") && i > 0 && j > 0) {
+                    if (tablero[i - 1][j].equals("[0]") && tablero[i + 1][j].equals("[0]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                    if (tablero[i][j - 1].equals("[0]") && tablero[i][j + 1].equals("[0]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                } else if (tablero[0][j].equals("[0]") && j > 0) {
+                    if (tablero[i][j - 1].equals("[0]") && tablero[i][j + 1].equals("[0]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                } else if (tablero[i][0].equals("[0]") && i > 0) {
+                    if (tablero[i - 1][j].equals("[0]") && tablero[i + 1][j].equals("[0]")) {
+                        tablero[i][j] = "[ ]";
+                    }
+                }
+            }
+        }
+        return tablero;
+    }
+
+    public static int esquina(String tablero[][], int fila2, int columna2) {
+        if (tablero[fila2][columna2] == tablero[0][0]
+                || tablero[fila2][columna2] == tablero[0][1]
+                || tablero[fila2][columna2] == tablero[1][0]
+                || tablero[fila2][columna2] == tablero[1][1]
+                || tablero[fila2][columna2] == tablero[0][0]
+                || tablero[fila2][columna2] == tablero[0][18]
+                || tablero[fila2][columna2] == tablero[0][17]
+                || tablero[fila2][columna2] == tablero[1][17]
+                || tablero[fila2][columna2] == tablero[1][18]
+                || tablero[fila2][columna2] == tablero[17][0]
+                || tablero[fila2][columna2] == tablero[17][1]
+                || tablero[fila2][columna2] == tablero[18][0]
+                || tablero[fila2][columna2] == tablero[18][1]
+                || tablero[fila2][columna2] == tablero[17][17]
+                || tablero[fila2][columna2] == tablero[17][18]
+                || tablero[fila2][columna2] == tablero[18][18]
+                || tablero[fila2][columna2] == tablero[18][17]) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
 
 }
