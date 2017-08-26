@@ -1,0 +1,29 @@
+Consideraciones importantes
+El programa que hice esta hecho con las especificaciones que dieron 
+-Tiene un metodo recursivo para imprimir la matris por el lado de la recursividad
+-Tiene Las clases
+ -Una pequeña jerarquia de clases que corresponden  a las piezas
+-El polimorfismo esta aplicado para los movimientos de las piezas y esta hecho
+ por sobreescritura de los metodos
+
+1-El programa no esta validado con try catch solamente con metodos y  etsructuras
+	while que determina
+	-Movimientos
+	-Pertenecia de piezas 
+	-Validaciones de posisciones que no se puede posar ciertas piezas
+	-Metodos de comer y ganar el juego
+2-Una consideraccion importante es que  las validaciones estan en secuencia
+   y pueden fallar dependiendo el punto hasta donde haya llegado pero como 
+  todo juego es normal y lo deje asi para dar ciertas ventajas si se llega a interpretar
+  por el jugador :v (pero las validaciones si sirven de forma normal solo que como 
+  estan en secuencia  si el jugador descubre como es la secuencia 
+  se puede hacer ciertos trucos para mover de forma vemtajosa)
+3-Antes de empezar el juego se tiene que crear por lo menos un usuario para jugar 
+	el menu viene asi
+	1-crear jugador
+	2-jugar
+	3-Salir
+   "Sino se crea el juagador antes se creara un error por lo tando se tendra que iniciar el juego"
+4-Las indicaciones sobre las piezas estan brindadas al iniciar el juego
+    player 1: duques ["+"]   y rey ["&"]
+   player 2: rebeldes["0"]	
