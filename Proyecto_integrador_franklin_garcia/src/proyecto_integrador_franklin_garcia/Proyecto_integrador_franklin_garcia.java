@@ -28,149 +28,155 @@ public class Proyecto_integrador_franklin_garcia {
             switch (opcion) {
                 case "1": {
                     String nombre = JOptionPane.showInputDialog("Nombre");
-                    lista.add(new Jugador(nombre, 0));
+                    lista.add(new Jugador(nombre));
                     JOptionPane.showMessageDialog(null, "Hecho");
                 }
                 break;
                 case "2": {
-                    int res = 0, cont = 0, fila1, columna1, fila2, columna2;
-                    String elementos = "";
-                    for (Jugador i : lista) {
-                        elementos += "\n" + lista.indexOf(i) + " " + i;
-                    }
-                    int player1 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador-1 "));
-                    int player2 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador-2"));
+                    String respuesta = "1";
+                    while (respuesta.equals("1")) {
+                        int res = 0, cont = 0, fila1, columna1, fila2, columna2;
+                        String elementos = "";
+                        for (Jugador i : lista) {
+                            elementos += "\n" + lista.indexOf(i) + " " + i;
+                        }
+                        int player1 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador-1 "));
+                        int player2 = Integer.parseInt(JOptionPane.showInputDialog(elementos + "\n" + "Jugador-2"));
 
-                    JOptionPane.showMessageDialog(null, "Jugadores \n"
-                            + "Turno 1----rey y duques pertenece a: " + lista.get(player1).getNombre() + "\n"
-                            + "Turno 2----Rebeldes pertenece a: " + lista.get(player2).getNombre() + "\n"
-                            + "Rey & \n"
-                            + "Duques + \n"
-                            + "Rebelde  0 \n");
-                    String tablero[][] = tablero();
-                    impTablero(tablero, 0, 0);
-                    System.out.println("");//salto de linea
-                    while (res < 1000000000) {//////////////////////////////////////////////validacion general del juego
+                        JOptionPane.showMessageDialog(null, "Jugadores \n"
+                                + "Turno 1----rey y duques pertenece a: " + lista.get(player1).getNombre() + "\n"
+                                + "Turno 2----Rebeldes pertenece a: " + lista.get(player2).getNombre() + "\n"
+                                + "Rey & \n"
+                                + "Duques + \n"
+                                + "Rebelde  0 \n");
+                        String tablero[][] = tablero();
+                        impTablero(tablero, 0, 0);
+                        System.out.println("");//salto de linea
+                        while (res < 1000000000) {//////////////////////////////////////////////validacion general del juego
 //...........................................Jugador1..............................................................                        
-                        if (cont == 0) {
-                            System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
-                            System.out.println("Ingrese fila-1");
-                            fila1 = lectura.nextInt();
-                            System.out.println("Ingrese columna-1");
-                            columna1 = lectura.nextInt();
-//------------------------------------------Validacion de pertenencia-------------------------------------------------
-                            while (pertenencia_player1(tablero, fila1, columna1) == 2) {
-                                JOptionPane.showMessageDialog(null, "Esa pieza no te pertenece o es es vacio\n"
-                                        + "Intentalo de nuevo");
+                            if (cont == 0) {
+                                System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
                                 System.out.println("Ingrese fila-1");
                                 fila1 = lectura.nextInt();
                                 System.out.println("Ingrese columna-1");
                                 columna1 = lectura.nextInt();
-                            }
+//------------------------------------------Validacion de pertenencia-------------------------------------------------
+                                while (pertenencia_player1(tablero, fila1, columna1) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Esa pieza no te pertenece o es es vacio\n"
+                                            + "Intentalo de nuevo");
+                                    System.out.println("Ingrese fila-1");
+                                    fila1 = lectura.nextInt();
+                                    System.out.println("Ingrese columna-1");
+                                    columna1 = lectura.nextInt();
+                                }
 //--------------------------------------------------------------------------------------------------------------------                            
-                            System.out.println("Ingrese fila-2");
-                            fila2 = lectura.nextInt();
-                            System.out.println("Ingrse columna-2");
-                            columna2 = lectura.nextInt();
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
 //-------------------------------validaciones de movimientos jugador1---------------------------------------------------
-                            while (tablero[fila1][columna1].equals("[+]") && d.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
-                                JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
-                            while (tablero[fila1][columna1].equals("[&]") && r.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
-                                JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
-                            while (pasar_player(tablero, fila1, columna1, fila2, columna2) == 2) {
-                                JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
-                            while (esquina(tablero, fila2, columna2, fila1, columna1) == 2) {
-                                JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
+                                while (tablero[fila1][columna1].equals("[+]") && d.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
+                                while (tablero[fila1][columna1].equals("[&]") && r.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
+                                while (pasar_player(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
+                                while (esquina(tablero, fila2, columna2, fila1, columna1) == 2) {
+                                    JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
 //-----------------------------------------------------------------------------------------------------------------------                            
-                            tablero[fila2][columna2] = tablero[fila1][columna1];
-                            tablero[fila1][columna1] = "[ ]";
-                            tablero = comer_player1(tablero);//comer
-                            impTablero(tablero, 0, 0);
-                            System.out.println("");//salto de linea
+                                tablero[fila2][columna2] = tablero[fila1][columna1];
+                                tablero[fila1][columna1] = "[ ]";
+                                tablero = comer_player1(tablero);//comer
+                                impTablero(tablero, 0, 0);
+                                System.out.println("");//salto de linea
 
-                            cont = 1;
-                        }
+                                cont = 1;
+                            }
 //.........................................Jugador2.........................................................                        
-                        if (cont == 1) {
-                            System.out.println("Turno 2" + lista.get(player2).getNombre() + "\n");
-                            System.out.println("Ingrese fila-1");
-                            fila1 = lectura.nextInt();
-                            System.out.println("Ingrese columna-1");
-                            columna1 = lectura.nextInt();
-//------------------------------------------Validacion de pertenencia-------------------------------------------------
-                            while (pertenencia_player2(tablero, fila1, columna1) == 2) {
-                                JOptionPane.showMessageDialog(null, "Esa pieza no te pertenece o es es vacio\n"
-                                        + "Intentalo de nuevo");
+                            if (cont == 1) {
+                                System.out.println("Turno 2" + lista.get(player2).getNombre() + "\n");
                                 System.out.println("Ingrese fila-1");
                                 fila1 = lectura.nextInt();
                                 System.out.println("Ingrese columna-1");
                                 columna1 = lectura.nextInt();
-                            }
+//------------------------------------------Validacion de pertenencia-------------------------------------------------
+                                while (pertenencia_player2(tablero, fila1, columna1) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Esa pieza no te pertenece o es es vacio\n"
+                                            + "Intentalo de nuevo");
+                                    System.out.println("Ingrese fila-1");
+                                    fila1 = lectura.nextInt();
+                                    System.out.println("Ingrese columna-1");
+                                    columna1 = lectura.nextInt();
+                                }
 //--------------------------------------------------------------------------------------------------------------------                            
-                            System.out.println("Ingrese fila-2");
-                            fila2 = lectura.nextInt();
-                            System.out.println("Ingrse columna-2");
-                            columna2 = lectura.nextInt();
+                                System.out.println("Ingrese fila-2");
+                                fila2 = lectura.nextInt();
+                                System.out.println("Ingrse columna-2");
+                                columna2 = lectura.nextInt();
 //-------------------------------validaciones de movimientos jugador2---------------------------------------------------
-                            while (tablero[fila1][columna1].equals("[0]") && re.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
-                                JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
-                            while (pasar_player(tablero, fila1, columna1, fila2, columna2) == 2) {
-                                JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
-                            while (esquina(tablero, fila2, columna2, fila1, columna1) == 2) {
-                                JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
-                                System.out.println("Ingrese fila-2");
-                                fila2 = lectura.nextInt();
-                                System.out.println("Ingrse columna-2");
-                                columna2 = lectura.nextInt();
-                            }
+                                while (tablero[fila1][columna1].equals("[0]") && re.movimientos(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Movimeinto incorrecto intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
+                                while (pasar_player(tablero, fila1, columna1, fila2, columna2) == 2) {
+                                    JOptionPane.showMessageDialog(null, "Movimiento incorrecto hay una pieza de por medio intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
+                                while (esquina(tablero, fila2, columna2, fila1, columna1) == 2) {
+                                    JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
+                                    System.out.println("Ingrese fila-2");
+                                    fila2 = lectura.nextInt();
+                                    System.out.println("Ingrse columna-2");
+                                    columna2 = lectura.nextInt();
+                                }
 //-----------------------------------------------------------------------------------------------------------------------                            
-                            tablero[fila2][columna2] = tablero[fila1][columna1];
-                            tablero[fila1][columna1] = "[ ]";
+                                tablero[fila2][columna2] = tablero[fila1][columna1];
+                                tablero[fila1][columna1] = "[ ]";
 
-                            tablero = comer_player2(tablero);//comer 
-                            impTablero(tablero, 0, 0);
-                            System.out.println("");//salto de linea
-                            cont = 0;
-                        }//fin jugador 2F
-                        if (Ganar_player1(tablero)==2) {
-                            System.out.println("Felicidades ha ganado: "+lista.get(player1).getNombre()); 
-                            break;
+                                tablero = comer_player2(tablero);//comer 
+                                impTablero(tablero, 0, 0);
+                                System.out.println("");//salto de linea
+                                cont = 0;
+                            }//fin jugador 2F
+                            if (Ganar_player1(tablero) == 2) {
+                                System.out.println("Felicidades ha ganado: " + lista.get(player1).getNombre());
+                                break;
+                            }
+                            if (Ganar_player2(tablero) == 2) {
+                                System.out.println("Felicidades ha ganado: " + lista.get(player2).getNombre());
+                                break;
+                            }
+                            res++;
                         }
-                        if (Ganar_player2(tablero)==2) {
-                            System.out.println("Felicidades ha ganado: "+lista.get(player2).getNombre());
-                            break;
-                        }
-                        res++;
+                      respuesta=JOptionPane.showInputDialog("Desea volver a jugar \n"
+                              + "1- si \n"
+                              + "2- no \n");
                     }
                 }///fin de la programacion del juego
                 break;
@@ -532,5 +538,5 @@ public class Proyecto_integrador_franklin_garcia {
             return 1;
         }
     }
-    
+
 }

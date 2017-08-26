@@ -11,14 +11,13 @@ package proyecto_integrador_franklin_garcia;
  */
 public class Jugador {
     private String nombre;
-    private int puntos;
+   
 
     public Jugador() {
     }
 
-    public Jugador(String nombre, int puntos) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
-        this.puntos = puntos;
     }
 
     public String getNombre() {
@@ -27,14 +26,6 @@ public class Jugador {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
     }
 
     @Override
