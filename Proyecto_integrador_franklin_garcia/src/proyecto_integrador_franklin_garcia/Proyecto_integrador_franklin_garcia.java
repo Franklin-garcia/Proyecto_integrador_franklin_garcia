@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyecto_integrador_franklin_garcia;
 
 import java.util.ArrayList;
@@ -49,13 +44,13 @@ public class Proyecto_integrador_franklin_garcia {
                     JOptionPane.showMessageDialog(null, "Jugadores \n"
                             + "Turno 1----rey y duques pertenece a: " + lista.get(player1).getNombre() + "\n"
                             + "Turno 2----Rebeldes pertenece a: " + lista.get(player2).getNombre() + "\n"
-                            + "Rebelde  0 \n"
                             + "Rey & \n"
-                            + "Duques + \n");
+                            + "Duques + \n"
+                            + "Rebelde  0 \n");
                     String tablero[][] = tablero();
                     impTablero(tablero, 0, 0);
                     System.out.println("");//salto de linea
-                    while (res < 10) {
+                    while (res < 1000000000) {//////////////////////////////////////////////validacion general del juego
 //...........................................Jugador1..............................................................                        
                         if (cont == 0) {
                             System.out.println("Turno 1 " + lista.get(player1).getNombre() + "\n");
@@ -99,7 +94,7 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrse columna-2");
                                 columna2 = lectura.nextInt();
                             }
-                            while (esquina(tablero, fila2, columna2) == 2) {
+                            while (esquina(tablero, fila2, columna2, fila1, columna1) == 2) {
                                 JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
                                 System.out.println("Ingrese fila-2");
                                 fila2 = lectura.nextInt();
@@ -151,7 +146,7 @@ public class Proyecto_integrador_franklin_garcia {
                                 System.out.println("Ingrse columna-2");
                                 columna2 = lectura.nextInt();
                             }
-                            while (esquina(tablero, fila2, columna2) == 2) {
+                            while (esquina(tablero, fila2, columna2, fila1, columna1) == 2) {
                                 JOptionPane.showMessageDialog(null, "No se puede mover hacia las esquinas intentalo de nuevo");
                                 System.out.println("Ingrese fila-2");
                                 fila2 = lectura.nextInt();
@@ -167,6 +162,15 @@ public class Proyecto_integrador_franklin_garcia {
                             System.out.println("");//salto de linea
                             cont = 0;
                         }//fin jugador 2F
+                        if (Ganar_player1(tablero)==2) {
+                            System.out.println("Felicidades ha ganado: "+lista.get(player1).getNombre()); 
+                            break;
+                        }
+                        if (Ganar_player2(tablero)==2) {
+                            System.out.println("Felicidades ha ganado: "+lista.get(player2).getNombre());
+                            break;
+                        }
+                        res++;
                     }
                 }///fin de la programacion del juego
                 break;
@@ -314,7 +318,6 @@ public class Proyecto_integrador_franklin_garcia {
 
     public static int pasar_player(String[][] tablero, int fila1, int columna1, int fila2, int columna2) {
         int cont1 = 0, cont2 = 0, retorno = 1;
-
         if (fila1 == fila2 && columna1 < columna2) {
             cont1 = fila1;
             cont2 = columna1 + 1;
@@ -384,10 +387,10 @@ public class Proyecto_integrador_franklin_garcia {
                 || tablero[17][18].equals("[&]")
                 || tablero[18][18].equals("[&]")
                 || tablero[18][17].equals("[&]")) {
-            return 1;
+            return 2;
 
         } else {
-            return 2;
+            return 1;
         }
     }
 
@@ -503,7 +506,7 @@ public class Proyecto_integrador_franklin_garcia {
         return tablero;
     }
 
-    public static int esquina(String tablero[][], int fila2, int columna2) {
+    public static int esquina(String tablero[][], int fila2, int columna2, int fila1, int columna1) {
         if (tablero[fila2][columna2] == tablero[0][0]
                 || tablero[fila2][columna2] == tablero[0][1]
                 || tablero[fila2][columna2] == tablero[1][0]
@@ -520,11 +523,14 @@ public class Proyecto_integrador_franklin_garcia {
                 || tablero[fila2][columna2] == tablero[17][17]
                 || tablero[fila2][columna2] == tablero[17][18]
                 || tablero[fila2][columna2] == tablero[18][18]
-                || tablero[fila2][columna2] == tablero[18][17]) {
+                || tablero[fila2][columna2] == tablero[18][17]
+                || tablero[fila2][columna2] == tablero[9][9]) {
             return 2;
+        } else if (tablero[fila1][columna1].equals("[&]")) {
+            return 1;
         } else {
             return 1;
         }
     }
-
+    
 }
